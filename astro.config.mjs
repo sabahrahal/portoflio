@@ -28,6 +28,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['@icons-pack/react-simple-icons'],
+    },
   },
 
   integrations: [
