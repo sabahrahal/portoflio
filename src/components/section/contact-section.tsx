@@ -2,6 +2,8 @@ import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { DATA } from "@/data/resume";
 
 export default function ContactSection() {
+  const { LinkedIn, email } = DATA.contact.social;
+
   return (
     <div className="border rounded-xl p-10 relative">
       <div className="absolute -top-4 border bg-primary z-10 rounded-xl px-4 py-1 left-1/2 -translate-x-1/2">
@@ -18,13 +20,31 @@ export default function ContactSection() {
           }}
         />
       </div>
-      <div className="relative flex flex-col items-center gap-4 text-center">
+      <div className="relative flex flex-col items-center gap-6 text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
           {DATA.sections.contact.heading}
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
           {DATA.sections.contact.text}
         </p>
+        <div className="flex gap-3">
+          <a
+            href={LinkedIn.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border bg-primary px-5 py-2 text-sm font-medium text-background hover:opacity-90 transition-opacity"
+          >
+            <LinkedIn.icon className="size-4" />
+            LinkedIn
+          </a>
+          <a
+            href={email.url}
+            className="inline-flex items-center gap-2 rounded-xl border px-5 py-2 text-sm font-medium hover:bg-muted transition-colors"
+          >
+            <email.icon className="size-4" />
+            Email
+          </a>
+        </div>
       </div>
     </div>
   );

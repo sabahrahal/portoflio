@@ -6,12 +6,22 @@ import { DATA } from "@/data/resume";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import HackathonsSection from "@/components/section/hackathons-section";
-import PhotosSection from "@/components/section/photos-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
+
+interface RecentPost {
+  id: string;
+  title: string;
+  publishedAt: string;
+  summary: string;
+}
+
+interface HomePageProps {
+  recentPosts?: RecentPost[];
+}
 
 const sectionComponents: Record<string, React.ReactNode> = {
   about: (
@@ -22,7 +32,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-            <Markdown>{DATA.summary}</Markdown>
+            <Markdown components={{ a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer">{children}</a> }}>{DATA.summary}</Markdown>
           </div>
         </BlurFade>
       </div>
@@ -116,7 +126,6 @@ const sectionComponents: Record<string, React.ReactNode> = {
       </BlurFade>
     </section>
   ),
-  photos: <PhotosSection />,
   contact: (
     <section id="contact">
       <BlurFade delay={BLUR_FADE_DELAY * 16}>
@@ -126,7 +135,54 @@ const sectionComponents: Record<string, React.ReactNode> = {
   ),
 };
 
-export default function HomePage() {
+export default function HomePage({ recentPosts = [] }: HomePageProps) {
+  const sectionComponentsWithBlog = {
+    ...sectionComponents,
+    blog: recentPosts.length > 0 ? (
+      <section id="blog">
+        <div className="flex min-h-0 flex-col gap-y-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 11}>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold">{DATA.sections.blog.heading}</h2>
+              <a
+                href="/blog"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {DATA.sections.blog.linkLabel} →
+              </a>
+            </div>
+          </BlurFade>
+          <div className="flex flex-col gap-5">
+            {recentPosts.map((post, id) => (
+              <BlurFade key={post.id} delay={BLUR_FADE_DELAY * 12 + id * 0.05}>
+                <a
+                  href={`/blog/${post.id}`}
+                  className="flex items-start gap-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <span className="text-xs font-mono tabular-nums font-medium mt-[5px]">
+                    {String(id + 1).padStart(2, "0")}.
+                  </span>
+                  <div className="flex flex-col gap-y-1 flex-1">
+                    <p className="tracking-tight font-medium">
+                      <span className="group-hover:text-foreground transition-colors">
+                        {post.title}
+                        <ChevronRight
+                          className="ml-1 inline-block size-4 stroke-3 text-muted-foreground opacity-0 -translate-x-2 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0"
+                          aria-hidden
+                        />
+                      </span>
+                    </p>
+                    <p className="text-xs text-muted-foreground">{post.publishedAt}</p>
+                  </div>
+                </a>
+              </BlurFade>
+            ))}
+          </div>
+        </div>
+      </section>
+    ) : null,
+  };
+
   const orderedSections = Object.entries(DATA.sections)
     .filter(([, s]) => s.enabled)
     .sort(([, a], [, b]) => a.order - b.order)
@@ -161,7 +217,7 @@ export default function HomePage() {
       </section>
       {orderedSections.map((key) => (
         <React.Fragment key={key}>
-          {sectionComponents[key]}
+          {sectionComponentsWithBlog[key as keyof typeof sectionComponentsWithBlog]}
         </React.Fragment>
       ))}
     </main>

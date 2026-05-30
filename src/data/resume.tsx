@@ -31,7 +31,7 @@ export const DATA = {
   description:
     "Desarrollador Front-End con más de 3 años de experiencia construyendo aplicaciones web modulares y escalables con React y TypeScript, potenciado con herramientas de desarrollo con IA.",
   summary:
-    "Actualmente en [SADE Consultoría Técnica](#work), construyendo soluciones en múltiples sectores en entornos ágiles. Con experiencia en [arquitecturas de microfrontends](#work) y [testing](#work). Aplicando [herramientas de desarrollo con IA](#work) bajo metodología [Spec-Driven Development](#work) para acelerar el ciclo de desarrollo.",
+    "Actualmente en [SADE Consultoría Técnica](https://www.grupo-sade.com/), construyendo soluciones en múltiples sectores en entornos ágiles. Con experiencia en arquitecturas de microfrontends y testing. Aplicando herramientas de desarrollo con IA bajo metodología Spec-Driven Development para acelerar el ciclo de desarrollo.",
   avatarUrl: "/picofme.webp",
   ogImage: "/og_image.png",
   sections: {
@@ -46,17 +46,22 @@ export const DATA = {
       text: "Una selección de proyectos que reflejan mi forma de construir y pensar.",
     },
     hackathons: {
-      order: 7, enabled: false,
+      order: 9, enabled: false,
       label: "Hackathons",
       heading: "Me gusta construir cosas",
       text: "Durante mi tiempo en la universidad, participé en {count}+ hackathons. Personas de todo el país se reunían para construir cosas increíbles en 2-3 días. Fue revelador ver las infinitas posibilidades que trae a la vida un grupo de personas motivadas y apasionadas.",
     },
     photos: {
-      order: 6, enabled: true,
+      order: 6, enabled: false,
       heading: "Mis Viajes Recientes",
     },
+    blog: {
+      order: 7, enabled: true,
+      heading: "Artículos",
+      linkLabel: "Ver todos",
+    },
     contact: {
-      order: 8, enabled: true,
+      order: 10, enabled: true,
       label: "Contacto",
       heading: "Ponte en Contacto",
       text: "¿Quieres hablar? No dudes en contactarme por LinkedIn o email y te responderé lo antes posible.",
@@ -93,6 +98,8 @@ export const DATA = {
     { name: "Vitest", icon: SiVitest, color: "#00FF74" },
     { name: "React Testing Library", icon: SiTestinglibrary, color: "#E33332" },
     { name: "Claude Code", icon: SiClaude, color: "#D97757" },
+    { name: "OpenCode" },
+    { name: "OpenSpec" },
     { name: "n8n", icon: SiN8n, color: "#EA4B71" },
     { name: "MCP" },
   ],
@@ -112,7 +119,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://linkedin.com/in/sabahrahal",
+        url: "https://www.linkedin.com/in/sabah-rahal/",
         icon: Icons.linkedin,
         navbar: true,
       },
@@ -185,10 +192,10 @@ export const DATA = {
     {
       title: "Papayita.app",
       href: "https://descubre.papayita.app/",
-      dates: "Octubre 2023 - Presente",
+      dates: "Abril 2026 - Presente",
       active: true,
       description:
-        "Proyecto propio en producción, construido desde cero en todas sus fases, desde la definición de producto hasta el despliegue. Una solución para el día a día del vendedor venezolano: tienda online propia, inventario en tiempo real, personalización, mapas y tasa BCV integrada. Desarrollado con Claude Code, Opencode y agentes bajo metodología Spec-Driven Development.",
+        "Proyecto propio en producción, construido desde cero en todas sus fases, desde la definición de producto hasta el despliegue. Una solución para el día a día del vendedor venezolano: tienda online propia, inventario en tiempo real, personalización, mapas y tasa BCV integrada. Desarrollado con Claude Code, OpenCode y agentes bajo metodología Spec-Driven Development.",
       technologies: [
         "Next.js",
         "React",
