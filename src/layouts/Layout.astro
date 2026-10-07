@@ -21,7 +21,7 @@ const {
 
 const pageTitle = title
   ? CONFIG.seo.titleTemplate.replace("%s", title).replace("%n", DATA.name)
-  : DATA.name;
+  : `${DATA.name} | Desarrollador Front-End`;
 const ogImage = image
   ? image.startsWith("http")
     ? image
@@ -114,6 +114,26 @@ const { baseFontSize } = CONFIG.typography;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Structured data -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: DATA.name,
+        url: CONFIG.site.url,
+        image: `${CONFIG.site.url}${DATA.avatarUrl}`,
+        jobTitle: "Desarrollador Front-End",
+        worksFor: { "@type": "Organization", name: "Game Store Iberia" },
+        address: { "@type": "PostalAddress", addressLocality: "Madrid", addressCountry: "ES" },
+        sameAs: [
+          DATA.contact.social.GitHub.url,
+          DATA.contact.social.LinkedIn.url,
+        ],
+      })}
+    />
 
     <!-- Robots -->
     <meta name="robots" content={CONFIG.seo.robots} />
